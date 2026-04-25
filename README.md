@@ -45,19 +45,31 @@ This notebook follows the requested assignment structure:
 1. Select 3 regions and spatial scale.
 2. Perform mandatory geospatial choropleth analysis before modelling.
 3. Fit SIR and ARIMA models separately for Odisha, Mizoram, and Tripura.
-4. Add a supervised AI/ML Random Forest model for next-year malaria high-risk classification.
+4. Compare the mechanistic and time-series model outputs.
 
-## Standalone AI/ML Notebook
+## Train/Test AI/ML Notebook
 
 Use:
 
-`notebooks/Malaria_AIML_Risk_Model.ipynb`
+`notebooks/Malaria_Train_Test_Model_Evaluation.ipynb`
 
-This notebook focuses only on the AI/ML model:
+This notebook contains the supervised AI/ML model workflow:
 
 - Feature engineering from historical malaria data
-- Time-aware train/test split
+- Chronological train/validation/test split
+- Training-only high-risk threshold to avoid target leakage
 - Dummy baseline, Logistic Regression, Random Forest, and Gradient Boosting
-- Classification metrics, confusion matrix, ROC curve
+- Validation-based model selection
+- Final held-out test metrics, confusion matrix, ROC curve, and precision-recall curve
 - Feature importance
 - Predictions for Odisha, Mizoram, and Tripura
+
+`notebooks/Malaria_AIML_Risk_Model.ipynb` is an earlier standalone AI/ML draft kept for reference.
+
+## Dataset Inspection Notebook
+
+Use:
+
+`notebooks/Malaria_Dataset_Inspect.ipynb`
+
+This notebook loads each CSV, shows the first and last rows, and explains what each dataset is about.
