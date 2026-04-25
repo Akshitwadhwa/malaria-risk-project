@@ -1,0 +1,23 @@
+Malaria PDF extraction report
+=============================
+
+district
+  file: /Users/Lenovo/Documents/New project/malaria-risk-project/data/processed/district_malaria_2000_2024_from_pdf.csv
+  rows: 16781
+  years=2000-2024
+  states_or_uts=38
+  skipped_numeric_rows=0
+  district_state_corrections=9
+
+state_situation
+  file: /Users/Lenovo/Documents/New project/malaria-risk-project/data/processed/state_malaria_situation_2021_2025_from_pdf.csv
+  rows: 185
+  state_year_rows=185
+  states_or_uts=37
+
+epidemiological
+  file: /Users/Lenovo/Documents/New project/malaria-risk-project/data/processed/state_epidemiological_2024_2025_from_pdf.csv
+  rows: 74
+  state_year_rows=74
+  categories=Category I:25, Category II:8, Category III:3, missing:38
+

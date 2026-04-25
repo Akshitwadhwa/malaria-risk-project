@@ -1,0 +1,186 @@
+year,state,tested,positive,pf,deaths,source_status
+2021,Andaman And Nicobar Islands,35471,27,11,0,reported
+2022,Andaman And Nicobar Islands,31737,50,20,0,reported
+2023,Andaman And Nicobar Islands,38986,42,11,0,reported
+2024,Andaman And Nicobar Islands,47413,96,46,0,reported
+2025,Andaman And Nicobar Islands,55701,48,25,0,provisional
+2021,Andhra Pradesh,7336198,1315,1081,0,reported
+2022,Andhra Pradesh,8653048,2022,1457,0,reported
+2023,Andhra Pradesh,10294202,5268,4437,0,reported
+2024,Andhra Pradesh,12364281,7866,6201,3,reported
+2025,Andhra Pradesh,12892737,7831,6312,8,provisional
+2021,Arunachal Pradesh,109635,8,2,0,reported
+2022,Arunachal Pradesh,136563,18,3,0,reported
+2023,Arunachal Pradesh,168521,11,5,0,reported
+2024,Arunachal Pradesh,158497,19,2,0,reported
+2025,Arunachal Pradesh,183940,32,11,0,provisional
+2021,Assam,3575791,162,67,0,reported
+2022,Assam,4139536,280,118,0,reported
+2023,Assam,4712599,567,283,0,reported
+2024,Assam,6510331,5036,1130,7,reported
+2025,Assam,5828906,3969,514,8,provisional
+2021,Bihar,304635,647,154,0,reported
+2022,Bihar,176335,578,208,0,reported
+2023,Bihar,225722,1257,519,0,reported
+2024,Bihar,225687,906,380,0,reported
+2025,Bihar,350332,1041,403,0,provisional
+2021,Chandigarh,28488,6,0,0,reported
+2022,Chandigarh,51828,2,0,0,reported
+2023,Chandigarh,56066,2,0,0,reported
+2024,Chandigarh,70924,2,0,0,reported
+2025,Chandigarh,86923,65,5,0,provisional
+2021,Chhattisgarh,4486737,29733,25827,38,reported
+2022,Chhattisgarh,5815212,30029,25902,20,reported
+2023,Chhattisgarh,6891223,31706,28167,15,reported
+2024,Chhattisgarh,7835708,31373,27300,18,reported
+2025,Chhattisgarh,6984779,28836,25304,0,provisional
+2021,Delhi,41253,167,29,0,reported
+2022,Delhi,46299,263,43,1,reported
+2023,Delhi,65633,344,41,1,reported
+2024,Delhi,224373,910,82,0,reported
+2025,Delhi,138354,1420,268,3,provisional
+2021,Goa,179401,90,48,0,reported
+2022,Goa,249449,587,244,0,reported
+2023,Goa,319859,1346,488,0,reported
+2024,Goa,406527,884,286,0,reported
+2025,Goa,457560,448,104,0,provisional
+2021,Gujarat,14297050,4921,465,0,reported
+2022,Gujarat,15192658,4785,518,0,reported
+2023,Gujarat,17442857,4311,662,1,reported
+2024,Gujarat,18109327,4365,698,1,reported
+2025,Gujarat,15152662,3029,817,0,provisional
+2021,Haryana,2903143,54,1,0,reported
+2022,Haryana,3323816,52,1,0,reported
+2023,Haryana,3708401,85,5,0,reported
+2024,Haryana,3775769,522,30,0,reported
+2025,Haryana,3625456,523,28,0,provisional
+2021,Himachal Pradesh,160788,15,3,0,reported
+2022,Himachal Pradesh,226943,12,2,0,reported
+2023,Himachal Pradesh,274839,23,0,0,reported
+2024,Himachal Pradesh,281499,28,2,0,reported
+2025,Himachal Pradesh,299039,26,7,0,provisional
+2021,Jammu And Kashmir,311235,31,2,0,reported
+2022,Jammu And Kashmir,450767,35,1,0,reported
+2023,Jammu And Kashmir,485729,44,14,0,reported
+2024,Jammu And Kashmir,461482,108,21,0,reported
+2025,Jammu And Kashmir,425194,124,20,0,provisional
+2021,Jharkhand,4080420,14198,9689,0,reported
+2022,Jharkhand,9778246,19167,14963,4,reported
+2023,Jharkhand,5731625,34087,28990,2,reported
+2024,Jharkhand,6127645,42352,35016,0,reported
+2025,Jharkhand,6844777,42301,32795,2,provisional
+2021,Karnataka,8226194,913,182,2,reported
+2022,Karnataka,11573428,289,34,0,reported
+2023,Karnataka,13349842,275,61,2,reported
+2024,Karnataka,14657160,740,114,3,reported
+2025,Karnataka,15589990,678,203,1,provisional
+2021,Kerala,1531555,309,115,1,reported
+2022,Kerala,2576921,439,206,0,reported
+2023,Kerala,3076673,569,301,7,reported
+2024,Kerala,3331487,954,494,6,reported
+2025,Kerala,3707524,1154,575,1,provisional
+2021,Ladakh,6,0,0,0,reported
+2022,Ladakh,2,2,0,0,reported
+2023,Ladakh,160,10,1,1,reported
+2024,Ladakh,247,9,1,0,reported
+2025,Ladakh,498,10,6,0,provisional
+2021,Lakshadweep,875,1,0,0,reported
+2022,Lakshadweep,1893,0,0,0,reported
+2023,Lakshadweep,1400,0,0,0,reported
+2024,Lakshadweep,1455,1,1,0,reported
+2025,Lakshadweep,2033,0,0,0,provisional
+2021,Madhya Pradesh,9864546,3181,1688,2,reported
+2022,Madhya Pradesh,11031117,3826,2452,0,reported
+2023,Madhya Pradesh,11530451,3794,2625,0,reported
+2024,Madhya Pradesh,11899664,3247,2041,0,reported
+2025,Madhya Pradesh,9850320,2307,1330,0,provisional
+2021,Maharashtra,13367383,19303,11858,14,reported
+2022,Maharashtra,17353964,15451,8983,26,reported
+2023,Maharashtra,18931780,16159,6297,19,reported
+2024,Maharashtra,21623801,21078,8832,26,reported
+2025,Maharashtra,25221781,23097,8728,15,provisional
+2021,Manipur,185337,19,8,0,reported
+2022,Manipur,170729,30,10,0,reported
+2023,Manipur,77627,34,12,0,reported
+2024,Manipur,148178,43,11,0,reported
+2025,Manipur,209153,79,10,0,provisional
+2021,Meghalaya,449073,491,437,3,reported
+2022,Meghalaya,586579,479,446,8,reported
+2023,Meghalaya,662339,1755,1679,14,reported
+2024,Meghalaya,789799,673,602,4,reported
+2025,Meghalaya,838033,418,356,2,provisional
+2021,Mizoram,391199,8018,6146,10,reported
+2022,Mizoram,461929,11156,8252,10,reported
+2023,Mizoram,367855,18077,11628,13,reported
+2024,Mizoram,307934,16899,8950,7,reported
+2025,Mizoram,289529,8865,5130,8,provisional
+2021,Nagaland,149337,8,3,0,reported
+2022,Nagaland,258973,9,4,0,reported
+2023,Nagaland,249433,10,5,0,reported
+2024,Nagaland,306539,12,3,0,reported
+2025,Nagaland,255537,224,6,0,provisional
+2021,Odisha,6914758,25503,22594,13,reported
+2022,Odisha,8160202,23770,19295,5,reported
+2023,Odisha,9509933,41973,33684,4,reported
+2024,Odisha,10468801,68693,50501,8,reported
+2025,Odisha,10832670,62137,43153,6,provisional
+2021,Puducherry,14873,5,0,0,reported
+2022,Puducherry,103037,0,0,0,reported
+2023,Puducherry,147431,6,0,0,reported
+2024,Puducherry,165198,4,3,0,reported
+2025,Puducherry,166617,21,9,0,provisional
+2021,Punjab,2114155,71,5,0,reported
+2022,Punjab,2942145,119,8,2,reported
+2023,Punjab,2823429,75,7,0,reported
+2024,Punjab,2842710,379,33,0,reported
+2025,Punjab,2806378,363,9,0,provisional
+2021,Rajasthan,6632314,925,119,0,reported
+2022,Rajasthan,10339992,1565,112,1,reported
+2023,Rajasthan,10085307,2263,248,0,reported
+2024,Rajasthan,10558402,2213,665,1,reported
+2025,Rajasthan,11904635,1751,687,0,provisional
+2021,Sikkim,7670,4,2,0,reported
+2022,Sikkim,7920,8,3,0,reported
+2023,Sikkim,9743,6,1,0,reported
+2024,Sikkim,21985,7,2,0,reported
+2025,Sikkim,18707,15,6,0,provisional
+2021,Tamil Nadu,9084732,772,67,0,reported
+2022,Tamil Nadu,11274448,354,71,0,reported
+2023,Tamil Nadu,12649263,385,84,0,reported
+2024,Tamil Nadu,12646221,347,96,0,reported
+2025,Tamil Nadu,12585245,322,104,1,provisional
+2021,Telangana,3527886,874,766,0,reported
+2022,Telangana,4952745,611,540,0,reported
+2023,Telangana,4868195,420,368,0,reported
+2024,Telangana,5081050,269,231,0,reported
+2025,Telangana,5161094,251,185,0,provisional
+2021,The Dadra And Nagar Haveli And Daman And Diu,124972,54,5,0,reported
+2022,The Dadra And Nagar Haveli And Daman And Diu,131198,111,16,0,reported
+2023,The Dadra And Nagar Haveli And Daman And Diu,146190,128,36,1,reported
+2024,The Dadra And Nagar Haveli And Daman And Diu,129983,207,29,0,reported
+2025,The Dadra And Nagar Haveli And Daman And Diu,130760,213,49,0,provisional
+2021,Tripura,927088,10136,9028,4,reported
+2022,Tripura,1181946,12771,9374,3,reported
+2023,Tripura,1584800,22412,12413,1,reported
+2024,Tripura,1185735,9738,4801,0,reported
+2025,Tripura,854317,6091,3641,0,provisional
+2021,Uttar Pradesh,4245089,10792,1464,0,reported
+2022,Uttar Pradesh,8322741,7039,503,0,reported
+2023,Uttar Pradesh,10672898,13603,1305,0,reported
+2024,Uttar Pradesh,14512288,13477,998,0,reported
+2025,Uttar Pradesh,18697953,14590,649,0,provisional
+2021,Uttarakhand,235005,13,6,0,reported
+2022,Uttarakhand,695700,19,4,0,reported
+2023,Uttarakhand,706891,24,3,0,reported
+2024,Uttarakhand,721555,241,29,0,reported
+2025,Uttarakhand,530679,196,56,0,provisional
+2021,West Bengal,8547685,28987,9694,3,reported
+2022,West Bengal,11649846,40594,7277,3,reported
+2023,West Bengal,12870741,26493,3565,2,reported
+2024,West Bengal,13653675,21802,3841,2,reported
+2025,West Bengal,13658022,21080,3925,0,provisional
+2021,India,114391977,161753,101566,90,reported
+2022,India,152049892,176522,101070,83,reported
+2023,India,164738643,227564,137945,83,reported
+2024,India,181653330,255500,153472,86,reported
+2025,India,186637835,233555,135430,55,provisional
