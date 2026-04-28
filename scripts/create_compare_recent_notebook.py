@@ -65,7 +65,8 @@ cells = [
         | 13 | Category distribution |
         | 14 | Imported vs indigenous cases |
         | 15 | India-level summary |
-        | 16 | Interpretation notes |
+        | 16 | Recent choropleth maps |
+        | 17 | Interpretation notes |
         """
     ),
     md(
@@ -76,11 +77,13 @@ cells = [
     code(
         """
         from pathlib import Path
+        import json
 
         import numpy as np
         import pandas as pd
         import matplotlib.pyplot as plt
         import matplotlib.ticker as mticker
+        import plotly.express as px
 
         PROJECT_ROOT = Path.cwd().resolve()
         if PROJECT_ROOT.name == "notebooks":
@@ -89,6 +92,7 @@ cells = [
             PROJECT_ROOT = PROJECT_ROOT.parent
 
         EPI_CSV = PROJECT_ROOT / "data" / "processed" / "state_epidemiological_2024_2025_from_pdf.csv"
+        GEOJSON_PATH = PROJECT_ROOT / "data" / "raw" / "india_states.geojson"
         SELECTED_REGIONS = ["Odisha", "Mizoram", "Tripura"]
         HIGHLIGHT_COLORS = {"Odisha": "tab:blue", "Mizoram": "tab:orange", "Tripura": "tab:green"}
 
@@ -632,7 +636,13 @@ cells = [
     ),
     md(
         """
-        **Why this matters:** Raw case counts can be affected by population size and testing volume. TPR helps reveal whether positivity among tested people changed, which is closer to epidemic intensity.
+        **Graph explanation:** This graph compares the change in **TPR (Test Positivity Rate)** from 2024 to 2025. TPR measures the percentage of tested people/samples that were malaria-positive, so it gives a better sense of infection intensity than raw case counts alone.
+
+        - The **left panel** shows the states/UTs where TPR increased the most. Delhi has the largest increase, meaning the share of tests that came back positive rose sharply from 2024 to 2025.
+        - The **right panel** shows the states/UTs where TPR decreased the most. Mizoram shows the largest fall, meaning positivity among tested people dropped strongly in 2025 compared with 2024.
+        - The selected project states are highlighted using their project colours where they appear. Mizoram and Tripura appear in the decrease panel, suggesting improvement in recent positivity, while Odisha also shows a smaller decrease.
+
+        **Presentation line:** "This plot shows recent change in malaria positivity. Even if raw cases are high, falling TPR can suggest reduced intensity among tested people; rising TPR can warn that transmission is becoming more concentrated or detection is increasing."
         """
     ),
     md(
@@ -777,7 +787,119 @@ cells = [
     ),
     md(
         """
-        ## 16. Interpretation Notes
+        ## 16. Recent Choropleth Maps
+        """
+    ),
+    code(
+        """
+        with open(GEOJSON_PATH, "r", encoding="utf-8") as f:
+            india_geojson = json.load(f)
+
+        STATE_NAME_FIX = {
+            "Andaman and Nicobar Islands": "Andaman And Nicobar Islands",
+            "Dadra and Nagar Haveli and Daman and Diu": "The Dadra And Nagar Haveli And Daman And Diu",
+            "Jammu and Kashmir": "Jammu And Kashmir",
+        }
+
+        geo_rows = []
+        for idx, feature in enumerate(india_geojson["features"]):
+            props = feature["properties"]
+            map_state = props["st_nm"]
+            data_state = STATE_NAME_FIX.get(map_state, map_state)
+            feature_id = str(props.get("dt_code") or f"feature_{idx}")
+            props["_feature_id"] = feature_id
+            geo_rows.append({
+                "feature_id": feature_id,
+                "map_state": map_state,
+                "state": data_state,
+                "map_district": props.get("district", map_state),
+            })
+
+        geo_index = pd.DataFrame(geo_rows)
+
+        map_recent = geo_index.merge(
+            changes_no_india[
+                [
+                    "state",
+                    "positive_2024",
+                    "positive_2025",
+                    "positive_change",
+                    "tpr_2024",
+                    "tpr_2025",
+                    "tpr_change",
+                    "category_2025",
+                ]
+            ],
+            on="state",
+            how="left",
+        )
+
+        def plot_recent_choropleth(value_col, title, color_scale="YlOrRd", midpoint=None):
+            fig = px.choropleth(
+                map_recent,
+                geojson=india_geojson,
+                locations="feature_id",
+                featureidkey="properties._feature_id",
+                color=value_col,
+                hover_name="map_state",
+                hover_data={
+                    "map_district": True,
+                    "positive_2024": ":,.0f",
+                    "positive_2025": ":,.0f",
+                    "positive_change": ":,.0f",
+                    "tpr_2024": ":.2f",
+                    "tpr_2025": ":.2f",
+                    "tpr_change": ":.2f",
+                    "category_2025": True,
+                    "feature_id": False,
+                },
+                color_continuous_scale=color_scale,
+                color_continuous_midpoint=midpoint,
+                title=title,
+            )
+            fig.update_geos(fitbounds="locations", visible=False)
+            fig.update_layout(margin=dict(l=0, r=0, t=55, b=0))
+            fig.show()
+
+        plot_recent_choropleth(
+            "positive_2025",
+            "Recent Choropleth 1: Positive Malaria Cases in 2025",
+            color_scale="YlOrRd",
+        )
+
+        plot_recent_choropleth(
+            "tpr_2025",
+            "Recent Choropleth 2: Test Positivity Rate (TPR) in 2025",
+            color_scale="Reds",
+        )
+
+        plot_recent_choropleth(
+            "positive_change",
+            "Recent Choropleth 3: Change in Positive Cases, 2024 to 2025",
+            color_scale="RdBu_r",
+            midpoint=0,
+        )
+
+        plot_recent_choropleth(
+            "tpr_change",
+            "Recent Choropleth 4: Change in TPR, 2024 to 2025",
+            color_scale="RdBu_r",
+            midpoint=0,
+        )
+        """
+    ),
+    md(
+        """
+        **Graph explanation:** These choropleth maps turn the recent 2024-2025 comparison into a spatial view. The first two maps show the 2025 situation: where positive cases and TPR are highest. The last two maps show change from 2024 to 2025: states shaded toward the increase side are worsening, while states shaded toward the decrease side are improving.
+
+        **Why this matters:** Bar charts are good for ranking states, but maps show whether high burden is spatially clustered. This helps connect the recent epidemiological situation with the broader geospatial analysis in the main modelling notebook.
+
+        **Presentation line:** "These maps show that malaria risk is not evenly distributed across India. Recent burden and recent change are spatially clustered, which supports our decision to avoid one national model and instead compare regional patterns."
+        """
+    ),
+    md(
+        """
+        ## 17. Interpretation Notes
 
         Use this section in the final report:
 
@@ -785,6 +907,7 @@ cells = [
         - It should not be used alone for time-series or AI/ML training because it has only two years.
         - It is useful for explaining recent state status, category, positivity, Pf burden, and imported versus indigenous cases.
         - The category meaning table explains why Category III represents a higher programme-risk group than Category I.
+        - The recent choropleths show where 2025 burden and 2024-2025 changes are spatially clustered.
         - The best whole-dataset plots are rankings, grouped 2024-vs-2025 burden comparisons, scatter comparisons, and increase/decrease bars rather than dense two-year line plots.
         - For Odisha, Mizoram, and Tripura, compare whether the latest indicators agree with the long-term risk patterns.
         """
