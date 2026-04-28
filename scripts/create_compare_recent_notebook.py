@@ -52,16 +52,20 @@ cells = [
         |---|---|
         | 1 | Setup |
         | 2 | Load and clean the recent epidemiological dataset |
-        | 3 | Data completeness and national totals |
-        | 4 | Build 2024 vs 2025 comparison table |
-        | 5 | Selected regions within the whole dataset |
-        | 6 | Highest burden states in 2025 |
-        | 7 | 2024 vs 2025 scatter comparison |
-        | 8 | Biggest increases/decreases in positive cases |
-        | 9 | Biggest increases/decreases in TPR |
-        | 10 | Category distribution |
-        | 11 | Imported vs indigenous cases |
-        | 12 | India-level summary |
+        | 3 | Data dictionary |
+        | 4 | Data completeness and national totals |
+        | 5 | Build 2024 vs 2025 comparison table |
+        | 6 | Selected regions within the whole dataset |
+        | 7 | Highest burden states in 2025 |
+        | 8 | Top burden positive cases: 2024 vs 2025 |
+        | 9 | 2024 vs 2025 scatter comparison |
+        | 10 | Biggest increases/decreases in positive cases |
+        | 11 | Biggest increases/decreases in TPR |
+        | 12 | Category meanings |
+        | 13 | Category distribution |
+        | 14 | Imported vs indigenous cases |
+        | 15 | India-level summary |
+        | 16 | Interpretation notes |
         """
     ),
     md(
@@ -73,6 +77,7 @@ cells = [
         """
         from pathlib import Path
 
+        import numpy as np
         import pandas as pd
         import matplotlib.pyplot as plt
         import matplotlib.ticker as mticker
@@ -401,7 +406,88 @@ cells = [
     ),
     md(
         """
-        ## 8. 2024 vs 2025 Scatter Comparison for All States/UTs
+        ## 8. Top Burden Positive Cases: 2024 vs 2025
+
+        This grouped bar chart compares 2024 and 2025 positive cases for the states/UTs with the highest recent burden.
+        """
+    ),
+    code(
+        """
+        top_burden_compare = (
+            changes_no_india
+            .assign(max_recent_positive=lambda df: df[["positive_2024", "positive_2025"]].max(axis=1))
+            .sort_values("max_recent_positive", ascending=False)
+            .head(15)
+            .sort_values("max_recent_positive", ascending=True)
+        )
+
+        y_pos = np.arange(len(top_burden_compare))
+        bar_height = 0.38
+
+        fig, ax = plt.subplots(figsize=(12, 7))
+        ax.barh(
+            y_pos - bar_height / 2,
+            top_burden_compare["positive_2024"],
+            height=bar_height,
+            label="2024",
+            color="#6b7280",
+        )
+        ax.barh(
+            y_pos + bar_height / 2,
+            top_burden_compare["positive_2025"],
+            height=bar_height,
+            label="2025",
+            color="#0f766e",
+        )
+
+        for idx, (_, row) in enumerate(top_burden_compare.iterrows()):
+            change = row["positive_change"]
+            change_label = f"{change:+,.0f}"
+            x_position = max(row["positive_2024"], row["positive_2025"])
+            ax.text(
+                x_position * 1.01,
+                idx,
+                change_label,
+                va="center",
+                fontsize=9,
+                color="#111827",
+            )
+
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(top_burden_compare["state"])
+        ax.set_title("Top burden states/UTs: positive malaria cases in 2024 vs 2025")
+        ax.set_xlabel("Positive cases")
+        ax.xaxis.set_major_formatter(mticker.FuncFormatter(fmt_count))
+        ax.legend(title="Year")
+        ax.grid(axis="x", alpha=0.25)
+
+        plt.tight_layout()
+        plt.show()
+
+        display(
+            top_burden_compare[
+                [
+                    "state",
+                    "positive_2024",
+                    "positive_2025",
+                    "positive_change",
+                    "positive_pct_change",
+                    "tpr_2024",
+                    "tpr_2025",
+                    "category_2025",
+                ]
+            ].sort_values("positive_2025", ascending=False)
+        )
+        """
+    ),
+    md(
+        """
+        **Why this matters:** This graph directly compares the same high-burden states across both recent years. The side-by-side bars show whether burden increased or decreased, while the change labels make the direction and size of change easy to explain in a presentation.
+        """
+    ),
+    md(
+        """
+        ## 9. 2024 vs 2025 Scatter Comparison for All States/UTs
 
         Each point is one state/UT. Points above the diagonal increased in 2025; points below the diagonal decreased.
         """
@@ -464,7 +550,7 @@ cells = [
     ),
     md(
         """
-        ## 9. Biggest Increases and Decreases in Positive Cases
+        ## 10. Biggest Increases and Decreases in Positive Cases
         """
     ),
     code(
@@ -508,7 +594,7 @@ cells = [
     ),
     md(
         """
-        ## 10. Biggest Increases and Decreases in TPR
+        ## 11. Biggest Increases and Decreases in TPR
         """
     ),
     code(
@@ -551,7 +637,45 @@ cells = [
     ),
     md(
         """
-        ## 11. Category Distribution in 2025
+        ## 12. Category Meaning
+        """
+    ),
+    code(
+        """
+        category_meaning = pd.DataFrame([
+            {
+                "category": "Category 0",
+                "meaning": "Transmission interrupted / zero indigenous malaria cases.",
+                "interpretation": "Lowest programme-risk group; focus is on preventing reintroduction.",
+            },
+            {
+                "category": "Category I",
+                "meaning": "Annual Parasite Incidence (API) is below 1 in all districts.",
+                "interpretation": "Low malaria intensity across districts.",
+            },
+            {
+                "category": "Category II",
+                "meaning": "State/UT API is below 1 overall, but at least one district has API above 1.",
+                "interpretation": "State looks low overall, but district-level hotspots remain important.",
+            },
+            {
+                "category": "Category III",
+                "meaning": "State/UT API is above 1.",
+                "interpretation": "Higher malaria intensity; stronger surveillance and control attention is needed.",
+            },
+        ])
+
+        display(category_meaning)
+        """
+    ),
+    md(
+        """
+        **Why this matters:** The category labels are not just names. They are programme-risk groups based on malaria intensity, especially API. This table makes the next category chart interpretable: Category III states are generally higher-risk than Category I states.
+        """
+    ),
+    md(
+        """
+        ## 13. Category Distribution in 2025
         """
     ),
     code(
@@ -582,7 +706,7 @@ cells = [
     ),
     md(
         """
-        ## 12. Imported vs Indigenous Cases in 2025
+        ## 14. Imported vs Indigenous Cases in 2025
         """
     ),
     code(
@@ -624,7 +748,7 @@ cells = [
     ),
     md(
         """
-        ## 13. National Summary: India Row
+        ## 15. National Summary: India Row
         """
     ),
     code(
@@ -653,14 +777,15 @@ cells = [
     ),
     md(
         """
-        ## 14. Interpretation Notes
+        ## 16. Interpretation Notes
 
         Use this section in the final report:
 
         - The recent 2024-2025 file adds epidemiological context to the long-term modelling dataset.
         - It should not be used alone for time-series or AI/ML training because it has only two years.
         - It is useful for explaining recent state status, category, positivity, Pf burden, and imported versus indigenous cases.
-        - The best whole-dataset plots are rankings, 2024-vs-2025 scatter comparisons, and increase/decrease bars rather than dense two-year line plots.
+        - The category meaning table explains why Category III represents a higher programme-risk group than Category I.
+        - The best whole-dataset plots are rankings, grouped 2024-vs-2025 burden comparisons, scatter comparisons, and increase/decrease bars rather than dense two-year line plots.
         - For Odisha, Mizoram, and Tripura, compare whether the latest indicators agree with the long-term risk patterns.
         """
     ),
