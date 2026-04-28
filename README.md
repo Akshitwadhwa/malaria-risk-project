@@ -73,3 +73,11 @@ Use:
 `notebooks/Malaria_Dataset_Inspect.ipynb`
 
 This notebook loads each CSV, shows the first and last rows, and explains what each dataset is about.
+
+## Recent Epidemiological Comparison Notebook
+
+Use:
+
+`notebooks/Compare_Recent_Epidemiological_Data.ipynb`
+
+This notebook uses `state_epidemiological_2024_2025_from_pdf.csv` to compare 2024 and 2025 indicators such as positive cases, Pf%, TPR, TFR, deaths, imported cases, indigenous cases, and category.
